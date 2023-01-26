@@ -11,10 +11,16 @@ do {
 let textarea = document.querySelector("#textarea");
 textarea.addEventListener("keyup", (e) => {
   // If enter if preseed, then send the message
-  if (e.key === "Enter") {
+  if (e.key === "Enter" && textarea.value.trim() !== "") {
     sendMessage(e.target.value);
   }
 });
+
+document.querySelector("#btn").addEventListener("click", (e) => {
+  if(textarea.value.trim() !== "") {
+    sendMessage(textarea.value);
+  }
+})
 
 // message sending logic
 let messageArea = document.querySelector(".message__area");
@@ -60,5 +66,5 @@ socket.on('message',(msg) => {
 
 // Scroll to the newest message
 function scrollToBottom() {
-    messageArea.scrollTOp = messageArea.scrollHeight;
+    messageArea.scrollTop = messageArea.scrollHeight;
 }
